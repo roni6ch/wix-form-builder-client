@@ -46,10 +46,7 @@ export class DataService {
       case 'tel':
         validators = [
           ...validators,
-          // Validators.pattern('[0-9 ]*'),
-          Validators.pattern(
-            '(([+][(]?[0-9]{1,3}[)]?)|([(]?[0-9]{4}[)]?))s*[)]?[-s.]?[(]?[0-9]{1,3}[)]?([-s.]?[0-9]{3})([-s.]?[0-9]{3,4})'
-          ),
+          Validators.pattern('[0-9 -]*'),
           Validators.minLength(7),
           Validators.maxLength(12),
         ];

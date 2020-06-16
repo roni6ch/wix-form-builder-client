@@ -11,7 +11,8 @@ import {
   providedIn: 'root',
 })
 export class HttpService {
-  private serverUrl = 'http://localhost:3000';
+  //private serverUrl = 'http://localhost:3000';
+  private serverUrl = 'https://form-builder-roni.herokuapp.com';
   constructor(private http: HttpClient) {}
 
   getFormList(): Observable<IFormList[]> {
