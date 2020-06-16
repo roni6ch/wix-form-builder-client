@@ -1,0 +1,14 @@
+<div [ngClass]="['wrapper', theme]">
+  <mat-toolbar color="primary">
+    <a routerLink="/form-list"
+      ><img src="../assets/images/logo.ico" class="logo" />
+      <span>Form Builder - By Roni Chabra</span></a
+    >
+    <mat-slide-toggle (click)="changeThemeColors()"
+      >{{ theme == "lightTheme" ? "Light" : "Dark" }} Mode</mat-slide-toggle
+    >
+  </mat-toolbar>
+  <div class="routerWrapper">
+    <router-outlet></router-outlet>
+  </div>
+</div>

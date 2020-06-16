@@ -1,0 +1,16 @@
+<mat-form-field [formGroup]="group">
+  <mat-label>{{ input.label }}</mat-label>
+  <input
+    matInput
+    [type]="input.type"
+    [formControlName]="input.name"
+    placeholder="Write Something..."
+  />
+
+  <mat-error *ngIf="group.get(input.name).hasError('required')">
+    {{ input.name }} is <strong>required</strong>
+  </mat-error>
+  <mat-error *ngIf="group.get(input.name).hasError('pattern')">
+    Wrong {{ input.name }} <strong> Pattern</strong>
+  </mat-error>
+</mat-form-field>

@@ -1,0 +1,19 @@
+<mat-form-field [formGroup]="group">
+  <mat-label>{{ input.label }}</mat-label>
+  <input
+    matInput
+    [type]="input.type"
+    [formControlName]="input.name"
+    placeholder="EX. abc@gmail.com"
+  />
+  <mat-error *ngIf="group.get(input.name).hasError('required')">
+    {{ input.name }} is <strong>required</strong>
+  </mat-error>
+  <mat-error *ngIf="group.get(input.name).hasError('minLength')">
+    {{ input.name }} needs to be more then <strong> 4 digits</strong>
+  </mat-error>
+  <mat-error *ngIf="group.get(input.name).hasError('email')">
+    {{ input.name }} is not by<strong> Email Format</strong>
+  </mat-error>
+
+</mat-form-field>

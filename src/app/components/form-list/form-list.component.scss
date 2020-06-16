@@ -1,0 +1,20 @@
+.formListWrapper {
+  table {
+    width: 100%;
+  }
+  td,
+  th {
+    width: 20%;
+  }
+  .mat-row:hover {
+    background: whitesmoke;
+  }
+  .addForm {
+    position: fixed;
+    bottom: 2%;
+    right: 2%;
+    mat-icon {
+      color: #fff;
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "title": "Roni",
+  "dynamicInputs": [
+    {
+      "label": "aaa",
+      "name": "bbb",
+      "type": "color"
+    },
+    {
+      "label": "ccc",
+      "name": "ddd",
+      "type": "date"
+    }
+  ]
+}

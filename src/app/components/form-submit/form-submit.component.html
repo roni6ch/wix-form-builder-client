@@ -1,0 +1,92 @@
+<mat-spinner *ngIf="!formsList"></mat-spinner>
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()" *ngIf="myForm">
+  <div [hidden]="!formsList" class="slide-in-blurred-top">
+    <h1>{{ formsList?.title }}</h1>
+    <div class="dynamicFormWrapper" [formGroup]="formInputs" *ngIf="formInputs">
+
+      <div *ngFor="let input of formsList?.dynamicInputs">
+        <ng-container appDynamicField [input]="input" [group]="formInputs">
+        </ng-container>
+      </div>
+
+      <!--  <mat-list *ngFor="let input of formsList?.dynamicInputs; let i = index">
+        <div [ngSwitch]="input.type">
+          <div *ngSwitchCase="'color'">
+            <mat-form-field>
+              <mat-label>{{ input.label }}</mat-label>
+              <input
+                matInput
+                [type]="input.type"
+                [formControlName]="input.name"
+              />
+            </mat-form-field>
+          </div>
+
+          <div *ngSwitchCase="'date'">
+            <mat-form-field>
+              <mat-label>{{ input.label }}</mat-label>
+              <input
+                matInput
+                [type]="input.type"
+                [formControlName]="input.name"
+                placeholder=""
+              />
+            </mat-form-field>
+          </div>
+
+          <div *ngSwitchCase="'email'">
+            <mat-form-field>
+              <mat-label>{{ input.label }}</mat-label>
+              <input
+                matInput
+                [type]="input.type"
+                [formControlName]="input.name"
+                placeholder="EX. abc@gmail.com"
+              />
+            </mat-form-field>
+          </div>
+
+          <div *ngSwitchCase="'text'">
+            <mat-form-field>
+              <mat-label>{{ input.label }}</mat-label>
+              <input
+                matInput
+                [type]="input.type"
+                [formControlName]="input.name"
+              />
+            </mat-form-field>
+          </div>
+
+          <div *ngSwitchCase="'number'">
+            <mat-form-field>
+              <mat-label>{{ input.label }}</mat-label>
+              <input
+                matInput
+                [type]="input.type"
+                [formControlName]="input.name"
+              />
+            </mat-form-field>
+          </div>
+
+          <div *ngSwitchCase="'tel'">
+            <mat-form-field>
+              <mat-label>{{ input.label }}</mat-label>
+              <input
+                matInput
+                [type]="input.type"
+                [formControlName]="input.name"
+                placeholder="EX. 050-2561234"
+              />
+            </mat-form-field>
+          </div>
+
+        </div>
+      </mat-list>
+      -->
+      <button mat-raised-button color="primary" class="submit" type="submit" [disabled]="!myForm.valid">
+        Submit!
+      </button>
+      <mat-spinner *ngIf="spinner"></mat-spinner>
+    </div>
+  </div>
+</form>

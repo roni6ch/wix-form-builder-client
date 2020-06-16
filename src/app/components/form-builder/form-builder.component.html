@@ -1,0 +1,145 @@
+<div class="formBuilderWrapper slide-in-blurred-top">
+  <h1>Form Builder</h1>
+  <form [formGroup]="formBuilder" (ngSubmit)="onSubmit()" class="inputsWrapper">
+    <!-- ADD NEW FORM INPUT -->
+    <mat-vertical-stepper #stepper [formGroup]="newForm">
+      <!-- Label & Name -->
+      <mat-step [stepControl]="newForm" *ngFor="let input of ['label', 'name']">
+        <ng-template matStepLabel>Fill out your {{ input }}</ng-template>
+        <mat-form-field>
+          <mat-label>{{ input }}</mat-label>
+          <input matInput type="text" [formControlName]="input" required />
+          <button
+            type="button"
+            mat-button
+            *ngIf="input"
+            matSuffix
+            mat-icon-button
+            aria-label="Clear"
+            (click)="clearNewFormInput(input)"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+          <mat-error *ngIf="newForm.get(input).hasError('required')">
+            {{ input }} is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <div>
+          <button type="button" mat-button (click)="stepper.reset()">
+            Reset
+          </button>
+          <button type="button" mat-button matStepperNext>Next</button>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Fill out your Input Type</ng-template>
+        <mat-form-field>
+          <mat-label>Type</mat-label>
+          <mat-select formControlName="type" required>
+            <mat-option>Clear</mat-option>
+            <mat-option *ngFor="let t of typeOptions" [value]="t">{{
+              t
+            }}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="newForm.get('type').hasError('required')"
+            >You must make a selection</mat-error
+          >
+        </mat-form-field>
+        <button type="button" mat-button (click)="stepper.reset()">
+          Reset
+        </button>
+        <button
+          type="button"
+          mat-raised-button
+          color="primary"
+          (click)="addFormGroup()"
+          [disabled]="!newForm.valid"
+          aria-label="Add form group"
+        >
+          <mat-icon>add</mat-icon> Add Field
+        </button>
+      </mat-step>
+    </mat-vertical-stepper>
+    <!-- END - NEW FORM INPUT -->
+
+    <!-- OUTPUTS -->
+    <div
+      class="dynamicFormWrapper slide-in-blurred-top"
+      *ngIf="dynamicInputs.length"
+    >
+      <!-- Form Title-->
+      <mat-form-field class="formTitle">
+        <mat-label>Form title</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="title"
+          placeholder="EX. Count Class Kids"
+        />
+        <button
+          type="button"
+          mat-button
+          *ngIf="title"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear title"
+          (click)="clearTitle()"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-error *ngIf="title.hasError('required')">
+          Title is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Drag and Drop the inputs -->
+      <div cdkDropList (cdkDropListDropped)="drop($event)">
+        <div
+          class="cdkDrag"
+          *ngFor="let dynamicInput of dynamicInputs.controls; let i = index"
+          cdkDrag
+        >
+          <mat-list
+            formArrayName="dynamicInputs"
+            [class]="dynamicInput.get('type').value"
+          >
+            <mat-list-item>
+              <mat-form-field>
+                <mat-label>{{ dynamicInput.get("label").value }}</mat-label>
+                <input
+                  matInput
+                  [name]="dynamicInput.get('name').value"
+                  [type]="dynamicInput.get('type').value"
+                />
+              </mat-form-field>
+              <button
+                type="button"
+                mat-mini-fab
+                matTooltip="Delete Form Control"
+                aria-label="Delete Form Control"
+                class="iconHandler"
+                color="primary"
+                (click)="deleteFormControl(i)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+          </mat-list>
+        </div>
+      </div>
+
+      <!-- OUTPUTS END -->
+      <button
+        mat-raised-button
+        color="primary"
+        class="submit"
+        type="submit"
+        [disabled]="!formBuilder.valid"
+      >
+        Save <mat-icon>send</mat-icon>
+      </button>
+      <mat-spinner *ngIf="spinner"></mat-spinner>
+    </div>
+  </form>
+</div>

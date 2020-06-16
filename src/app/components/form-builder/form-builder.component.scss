@@ -1,0 +1,41 @@
+.inputsWrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: stretch;
+  align-content: stretch;
+  .mat-form-field {
+    text-transform: capitalize;
+  }
+  mat-vertical-stepper {
+    width: min-content;
+  }
+}
+.dynamicFormWrapper {
+  border: 1px solid #cdcdcd;
+  padding: 20px;
+  border-radius: 5px;
+  width: 250px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  .cdkDrag {
+    cursor: move;
+    .mat-form-field {
+      pointer-events: none;
+    }
+  }
+  .formTitle {
+    width: 100%;
+  }
+  .iconHandler {
+    margin: 0% 5%;
+  }
+  /* dynamic class change */
+  ::ng-deep .color .mat-form-field-underline {
+    display: none;
+  }
+  .submit,
+  ::ng-deep .mat-list-item-content {
+    margin: 5% 0% 0%;
+  }
+}
